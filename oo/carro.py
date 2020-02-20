@@ -123,26 +123,25 @@ class Motor:
         self.velocidade -= 2
         self.velocidade = max(0, self.velocidade)
 
+NORTE = 'Norte'
+SUL = 'Sul'
+LESTE = 'Leste'
+OESTE = 'Oeste'
+
+
 class Direcao:
+    rotacao_a_direita_dct = {
+        NORTE: LESTE, LESTE: SUL, SUL: OESTE, OESTE: NORTE
+    }
+    rotacao_a_esquerda_dct = {
+        NORTE: OESTE, LESTE: NORTE, SUL: LESTE, OESTE: SUL
+    }
+
     def __init__(self):
-        self.valor = 'Norte'
+        self.valor = NORTE
 
     def girar_a_direita(self):
-        if self.valor == 'Norte':
-            self.valor = 'Leste'
-        elif self.valor == 'Leste':
-            self.valor = 'Sul'
-        elif self.valor == 'Sul':
-            self.valor = 'Oeste'
-        elif self.valor == 'Oeste':
-            self.valor = 'Norte'
+        self.valor = self.rotacao_a_direita_dct[self.valor]
 
     def girar_a_esquerda(self):
-        if self.valor == 'Norte':
-            self.valor = 'Oeste'
-        elif self.valor == 'Oeste':
-            self.valor = 'Sul'
-        elif self.valor == 'Sul':
-            self.valor = 'Leste'
-        elif self.valor == 'Leste':
-            self.valor = 'Norte'
+        self.valor = self.rotacao_a_esquerda_dct[self.valor]
